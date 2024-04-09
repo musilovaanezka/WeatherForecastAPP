@@ -17,7 +17,11 @@ namespace WeatherForecastAPP.Services
 			try
 			{
 				var response = await _apiClientService.PostAsync<User>(Controller + "/signin", user);
-				return true;
+                if (response != null)
+                {
+                    return true;
+                }
+                return false;
 			}
 			catch (Exception ex)
 			{
@@ -30,7 +34,11 @@ namespace WeatherForecastAPP.Services
 			try
 			{
 				var response = await _apiClientService.PostAsync<User>(Controller + "/signup", user);
-				return true;
+				if (response != null)
+				{
+					return true;
+				}
+				return false;
 			} 
 			catch (Exception ex)
 			{

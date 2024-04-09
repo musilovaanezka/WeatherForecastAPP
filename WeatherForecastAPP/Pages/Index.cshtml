@@ -25,6 +25,18 @@
         @TempData["SignInSuccess"]
     </div>
 }
+
+@{
+    string IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated");
+}
+
+@if (IsAuthenticated == "true")
+{
+    <div class="alert alert-success" role="alert">
+        "User is authenticated"
+    </div>
+}
+
 <div class="container bg-light rounded-2 p-3">
 
     <form asp-page-handler="newCity" method="post">
@@ -108,9 +120,9 @@
                             <table class="table table-borderless m-0">
                                 <tr>
                                     <td>
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@("collapse" + dayForecast.Key.ToString("dd"))" aria-expanded="false" aria-controls="@("collapse" + dayForecast.Key.ToString("dd"))">
-                                @dayForecast.Key.ToString("dddd, d. MMMM")
-                            </button>
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@("collapse" + dayForecast.Key.ToString("dd"))" aria-expanded="false" aria-controls="@("collapse" + dayForecast.Key.ToString("dd"))">
+                                            @dayForecast.Key.ToString("dddd, d. MMMM")
+                                        </button>
                                     </td>
                                 </tr>
                             </table>
