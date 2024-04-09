@@ -15,6 +15,7 @@ namespace WeatherForecastAPP.Pages
 		private readonly ICurrentWeatherService _currentWeatherService;
 		private readonly IWeatherIconsService _weatherIconsService;
 		private readonly IHourlyWeatherForecastService _hourlyForecastService;
+		private readonly IDailyWeatherForecastService _dailyWeatherForecastService;
 
 		public IndexModel(
 			ILogger<IndexModel> logger, 
@@ -22,7 +23,8 @@ namespace WeatherForecastAPP.Pages
 			IUserService userService, 
 			ICurrentWeatherService currentWeatherService,
 			IWeatherIconsService weatherIconsService,
-			IHourlyWeatherForecastService hourlyWeatherForecastService)
+			IHourlyWeatherForecastService hourlyWeatherForecastService,
+			IDailyWeatherForecastService dailyWeatherForecastService)
 		{
 			_logger = logger;
 			_cityService = cityService;
@@ -30,13 +32,17 @@ namespace WeatherForecastAPP.Pages
 			_currentWeatherService = currentWeatherService;
 			_weatherIconsService = weatherIconsService;
 			_hourlyForecastService = hourlyWeatherForecastService;
+			_dailyWeatherForecastService = dailyWeatherForecastService;
 		}
 
+
+		public bool DataLoaded { get; private set; } = true;
 		public City CurrentCity { get; private set; }
 		public List<City> Cities { get; private set; }
 		public CurrentWeather CurrentWeather {  get; private set; }
 
         public WeatherForecast WeatherForecastHourly { get; private set; }
+		public DailyWeatherForecast WeatherForecastDaily { get; private set; }
 
         public async Task OnGetAsync()
 		{
@@ -44,9 +50,8 @@ namespace WeatherForecastAPP.Pages
 			{
 				var cities = await _cityService.GetAsync("»·slav", null, null);
 				CurrentCity = cities[0];
-				CurrentWeather = await _currentWeatherService.GetCurrentWeatherAsync(CurrentCity);
-				WeatherForecastHourly = await _hourlyForecastService.GetHourlyWeatherForecastAsync(CurrentCity);
-			} 
+				await SetData();
+            } 
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "Error occurred while fetching cities");
@@ -62,8 +67,7 @@ namespace WeatherForecastAPP.Pages
 				if (cities.Count == 1)
 				{
 					CurrentCity = cities[0];
-                    CurrentWeather = await _currentWeatherService.GetCurrentWeatherAsync(CurrentCity);
-                    WeatherForecastHourly = await _hourlyForecastService.GetHourlyWeatherForecastAsync(CurrentCity);
+                    await SetData();
                 }
 				else
 				{
@@ -89,8 +93,7 @@ namespace WeatherForecastAPP.Pages
 				if (selectedCity != null)
 				{
 					CurrentCity = selectedCity;
-                    CurrentWeather = await _currentWeatherService.GetCurrentWeatherAsync(CurrentCity);
-                    WeatherForecastHourly = await _hourlyForecastService.GetHourlyWeatherForecastAsync(CurrentCity);
+                    await SetData();
                 }
 			}
 			catch (Exception ex)
@@ -104,5 +107,23 @@ namespace WeatherForecastAPP.Pages
 			// adding icon of current weather by its url address - zoom = 2x
 			return _weatherIconsService.GetIconUrlAsync(icon, zoom);
 		}
-	}
+
+		private async Task SetData()
+		{
+			if (CurrentCity == null) 
+			{
+				DataLoaded = false;
+				return; 
+			}
+            CurrentWeather = await _currentWeatherService.GetCurrentWeatherAsync(CurrentCity);
+            WeatherForecastHourly = await _hourlyForecastService.GetHourlyWeatherForecastAsync(CurrentCity);
+            WeatherForecastDaily = await _dailyWeatherForecastService.GetDailyWeatherForecastAsync(CurrentCity);
+			if (CurrentWeather == null || WeatherForecastHourly == null || WeatherForecastDaily == null)
+			{
+				DataLoaded = false;
+				return;
+			}
+
+        }
+    }
 }

@@ -15,7 +15,9 @@ namespace WeatherForecastAPP.Services
 				.AddSingleton<CurrentWeatherApiClientService>()
 				.AddSingleton<IWeatherIconsService, WeatherIconsService>()
 				.AddSingleton<IHourlyWeatherForecastService, HourlyWeatherForecastService>()
-				.AddSingleton<HourlyWeatherForecastApiClientService>();
+				.AddSingleton<HourlyWeatherForecastApiClientService>()
+				.AddSingleton<IDailyWeatherForecastService, DailyWeatherForecastService>()
+				.AddSingleton<DailyWeatherForecastApiClientService>();
 		}
 	}
 }

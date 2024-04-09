@@ -30,5 +30,9 @@ namespace WeatherForecastAPP
 		public static string WeatherAPIForecastHourlyEndpoint = "hourly";
 
         public static string BaseHourlyForecastWeatherAPIUrl = $"{WeatherAPIProBaseUrl}/{WeatherAPIDataEndpoint}/{WeatherAPIDataEndpointVersion}/{WeatherAPIForecastEndpoint}/";
+
+        public static string WeatherAPIForecastDailyEndpoint = "daily";
+
+        public static string BaseDailyForecastWeatherAPIUrl = $"{WeatherAPIBaseUrl}/{WeatherAPIDataEndpoint}/{WeatherAPIDataEndpointVersion}/{WeatherAPIForecastEndpoint}/";
     }
 }
