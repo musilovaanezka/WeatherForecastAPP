@@ -1,0 +1,128 @@
+﻿@page
+@using System.Globalization
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container bg-light rounded-2 p-3">
+
+    <form asp-page-handler="newCity" method="post">
+        <div class="form-group mb-2 mt-2">
+            <label for="city">Search for a city:</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+
+    <div class="row mb-2">
+        @if ((Model.Cities == null || Model.Cities.Count == 0) && Model.CurrentCity == null)
+        {
+            <h4>No cities found</h4>
+        }
+    </div>
+
+    <div class="row mb-2">
+        @if (Model.Cities != null && Model.Cities.Any())
+        {
+            <form asp-page-handler="fromCities" method="post">
+                <p>Choose a city:</p>
+                @foreach (var city in Model.Cities)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="@city.Id" name="selectedCityId" value="@city.Id"/>
+                        <label class="form-check-label" for="@city.Id">@city.Name @city.Country @city.State</label>
+                    </div>
+                }
+                <button type="submit" class="btn btn-primary">Select</button>
+            </form>
+        }
+    </div>
+
+    <div class="col-12 card mb-4">
+        @if (Model.CurrentCity != null)
+        {
+            <div class="card-body row">
+                <h2 class="col-6 align-evenly">@Model.CurrentCity.Name @Model.CurrentCity.Country @Model.CurrentCity.State</h2>
+                <div class="col-6">
+                    <img src="@Model.GetIcon(Model.CurrentWeather.Weather[0].Icon, 2)" alt="Weather Icon"/>
+                </div>
+                <h3 class="mb-4">@Model.CurrentWeather.Main.Temp °C</h3>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th width="50%">Feels like</th>
+                            <td>@Model.CurrentWeather.Main.FeelsLike °C</td>
+                        </tr>
+                        <tr>
+                            <th width="50%">Weather</th>
+                            <td>@Model.CurrentWeather.Weather[0].Description</td>
+                        </tr>
+                        <tr>
+                            <th width="50%">Wind Speed</th>
+                            <td>@Model.CurrentWeather.Wind.Speed m/s</td>
+                        </tr>
+                        <tr>
+                            <th width="50%">Clouds</th>
+                            <td>@Model.CurrentWeather.Clouds.All %</td>
+                        </tr>
+                        <tr>
+                            <th width="50%">Rain in last hour</th>
+                            <td>@(Model.CurrentWeather.Rain != null ? Model.CurrentWeather.Rain.Hour + " mm": "No Rain") </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+    <div class="col-12 card mb-4">
+        @if (Model.CurrentCity != null)
+        {
+            <div class="card-body row">
+                <h4>Hourly Weather Forecast</h4>
+                @foreach (var dayForecast in Model.WeatherForecastHourly.List.GroupBy(f => DateTime.ParseExact(f.DxTxt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date))
+                {
+                    <div class="card mb-3">
+                        <div class="card-header p-2" id="@("heading" + dayForecast.Key.ToString("dd"))">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@("collapse" + dayForecast.Key.ToString("dd"))" aria-expanded="false" aria-controls="@("collapse" + dayForecast.Key.ToString("dd"))">
+                                @dayForecast.Key.ToString("dddd, d. MMMM")
+                            </button>
+                        </div>
+                        <div class="collapse" id="@("collapse" + dayForecast.Key.ToString("dd"))">
+                            <div class="card-body">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>Hour</th>
+                                            <th>Temperature</th>
+                                            <th>Weather</th>
+                                            <th>Wind speed</th>
+                                            <th>Rain</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var forecast in dayForecast)
+                                        {
+                                            <tr>
+                                                <td>@DateTime.ParseExact(forecast.DxTxt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Hour</td>
+                                                <td>@forecast.Main.Temp °C</td>
+                                                <td>@forecast.Weather[0].Description</td>
+                                                <td>@forecast.Wind.Speed m/s</td>
+                                                <td>@(forecast.Rain != null ? forecast.Rain.Hour + " mm" : "No Rain")</td>
+                                                <td><img src="@Model.GetIcon(@forecast.Weather[0].Icon)" alt="Weather Icon" /></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+</div>
+
