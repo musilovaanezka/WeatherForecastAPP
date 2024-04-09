@@ -1,0 +1,33 @@
+﻿@page
+@using System.Globalization
+@model SignUpModel
+@{
+    ViewData["Title"] = "Sign up";
+}
+
+@if (TempData.ContainsKey("SignUpFailed"))
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["SignUpFailed"]
+    </div>
+}
+
+<div class="container bg-light rounded-3 p-3">
+    <h1>Sign Up</h1>
+    <form asp-page-handler="signUp" method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+            <small class="form-text text-muted">Password must be at least 8 characters long and must contain at least 1 digit</small>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>

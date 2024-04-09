@@ -5,6 +5,38 @@
     ViewData["Title"] = "Home page";
 }
 
+@if(!Model.DataLoaded)
+{
+    <div class="alert alert-danger" role="alert">
+        Data cannot be loaded
+    </div>
+}
+
+@if (TempData.ContainsKey("SignUpSuccess"))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SignUpSuccess"]
+    </div>
+}
+
+@if (TempData.ContainsKey("SignInSuccess"))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SignInSuccess"]
+    </div>
+}
+
+@{
+    string IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated");
+}
+
+@if (IsAuthenticated == "true")
+{
+    <div class="alert alert-success" role="alert">
+        "User is authenticated"
+    </div>
+}
+
 <div class="container bg-light rounded-2 p-3">
 
     <form asp-page-handler="newCity" method="post">
@@ -85,13 +117,19 @@
                 {
                     <div class="card mb-3">
                         <div class="card-header p-2" id="@("heading" + dayForecast.Key.ToString("dd"))">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@("collapse" + dayForecast.Key.ToString("dd"))" aria-expanded="false" aria-controls="@("collapse" + dayForecast.Key.ToString("dd"))">
-                                @dayForecast.Key.ToString("dddd, d. MMMM")
-                            </button>
+                            <table class="table table-borderless m-0">
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@("collapse" + dayForecast.Key.ToString("dd"))" aria-expanded="false" aria-controls="@("collapse" + dayForecast.Key.ToString("dd"))">
+                                            @dayForecast.Key.ToString("dddd, d. MMMM")
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="collapse" id="@("collapse" + dayForecast.Key.ToString("dd"))">
                             <div class="card-body">
-                                <table class="table table-borderless">
+                                <table class="table table-borderless m-0">
                                     <thead>
                                         <tr>
                                             <th>Hour</th>
@@ -120,6 +158,26 @@
                         </div>
                     </div>
                 }
+            </div>
+        }
+    </div>
+
+    <div class="col-12 card mb-4">
+        <h4>Daily Weather Forecast</h4>
+        @foreach (var dayForecast in Model.WeatherForecastDaily.List)
+        {
+            <div class="card mb-3">
+                <div class="card-header p-2 bg-light" id="@("heading" + dayForecast.Dt)">
+                    <table class="table table-borderless m-0">
+                        <tr class="align-middle">
+                            <td width="25%">@DateTimeOffset.FromUnixTimeSeconds(dayForecast.Dt).DateTime.ToString("dddd, d. MMMM")</td>
+                            <td width="20%">@dayForecast.Temp.Day °C</td>
+                            <td width="20%">@dayForecast.Weather[0].Description</td>
+                            <td width="20%">@(dayForecast.Rain != null ? dayForecast.Rain + " mm" : "No Rain")</td>
+                            <td width="15%"><img src="@Model.GetIcon(@dayForecast.Weather[0].Icon)" alt="Weather Icon" /></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         }
     </div>
