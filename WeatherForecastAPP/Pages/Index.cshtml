@@ -26,17 +26,6 @@
     </div>
 }
 
-@{
-    string IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated");
-}
-
-@if (IsAuthenticated == "true")
-{
-    <div class="alert alert-success" role="alert">
-        "User is authenticated"
-    </div>
-}
-
 <div class="container bg-light rounded-2 p-3">
 
     <form asp-page-handler="newCity" method="post">
@@ -79,12 +68,12 @@
                 <div class="col-6">
                     <img src="@Model.GetIcon(Model.CurrentWeather.Weather[0].Icon, 2)" alt="Weather Icon"/>
                 </div>
-                <h3 class="mb-4">@Model.CurrentWeather.Main.Temp °C</h3>
+                <h3 class="mb-4">@Convert.ToInt32(Model.CurrentWeather.Main.Temp) °C</h3>
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
                             <th width="50%">Feels like</th>
-                            <td>@Model.CurrentWeather.Main.FeelsLike °C</td>
+                            <td>@Convert.ToInt32(Model.CurrentWeather.Main.FeelsLike) °C</td>
                         </tr>
                         <tr>
                             <th width="50%">Weather</th>
@@ -108,15 +97,14 @@
         }
     </div>
 
-    <div class="col-12 card mb-4">
-        @if (Model.CurrentCity != null)
-        {
-            <div class="card-body row">
-                <h4>Hourly Weather Forecast</h4>
+    @if (Model.CurrentCity != null)
+    {
+        <h4>Hourly Weather Forecast</h4>
+        <div class="col-12 mb-4">
                 @foreach (var dayForecast in Model.WeatherForecastHourly.List.GroupBy(f => DateTime.ParseExact(f.DxTxt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date))
                 {
-                    <div class="card mb-3">
-                        <div class="card-header p-2" id="@("heading" + dayForecast.Key.ToString("dd"))">
+                    <div class="card mb-3 background-white">
+                        <div class="p-2" id="@("heading" + dayForecast.Key.ToString("dd"))">
                             <table class="table table-borderless m-0">
                                 <tr>
                                     <td>
@@ -145,7 +133,7 @@
                                         {
                                             <tr>
                                                 <td>@DateTime.ParseExact(forecast.DxTxt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Hour</td>
-                                                <td>@forecast.Main.Temp °C</td>
+                                                <td>@Convert.ToInt32(forecast.Main.Temp) °C</td>
                                                 <td>@forecast.Weather[0].Description</td>
                                                 <td>@forecast.Wind.Speed m/s</td>
                                                 <td>@(forecast.Rain != null ? forecast.Rain.Hour + " mm" : "No Rain")</td>
@@ -158,20 +146,19 @@
                         </div>
                     </div>
                 }
-            </div>
-        }
-    </div>
+        </div>
+    }
 
-    <div class="col-12 card mb-4">
-        <h4>Daily Weather Forecast</h4>
+    <h4>Daily Weather Forecast</h4>
+    <div class="col-12 mb-4 bg-light">
         @foreach (var dayForecast in Model.WeatherForecastDaily.List)
         {
             <div class="card mb-3">
-                <div class="card-header p-2 bg-light" id="@("heading" + dayForecast.Dt)">
+                <div class="card-header p-2 bg-white" id="@("heading" + dayForecast.Dt)">
                     <table class="table table-borderless m-0">
                         <tr class="align-middle">
                             <td width="25%">@DateTimeOffset.FromUnixTimeSeconds(dayForecast.Dt).DateTime.ToString("dddd, d. MMMM")</td>
-                            <td width="20%">@dayForecast.Temp.Day °C</td>
+                            <td width="20%">@Convert.ToInt32(dayForecast.Temp.Day) °C</td>
                             <td width="20%">@dayForecast.Weather[0].Description</td>
                             <td width="20%">@(dayForecast.Rain != null ? dayForecast.Rain + " mm" : "No Rain")</td>
                             <td width="15%"><img src="@Model.GetIcon(@dayForecast.Weather[0].Icon)" alt="Weather Icon" /></td>
