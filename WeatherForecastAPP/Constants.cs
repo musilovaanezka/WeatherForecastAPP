@@ -14,6 +14,7 @@ namespace WeatherForecastAPP
 		public static string WeatherAPIBaseUrl = "https://api.openweathermap.org";
         public static string WeatherAPIProBaseUrl = "https://pro.openweathermap.org";
         public static string WeatherAPPBaseUrl = "https://openweathermap.org";
+        public static string WeatherHistoryAPIBaseUrl = "https://history.openweathermap.org";
 
 
         public static string WeatherAPIDataEndpoint = "data";
@@ -34,5 +35,12 @@ namespace WeatherForecastAPP
         public static string WeatherAPIForecastDailyEndpoint = "daily";
 
         public static string BaseDailyForecastWeatherAPIUrl = $"{WeatherAPIBaseUrl}/{WeatherAPIDataEndpoint}/{WeatherAPIDataEndpointVersion}/{WeatherAPIForecastEndpoint}/";
+
+		private static string WeatherHistoryAPIDataEndpoint = "data";
+        private static string WeatherHistoryAPIDataEndpointVersion = "2.5";
+        private static string WeatherHistoryAPIHistoryEndpoint = "history";
+        public static string WeatherHistoryAPICityEndpoint = "city";
+
+        public static string BaseWeatherAPIHistoryUrl = $"{WeatherHistoryAPIBaseUrl}/{WeatherHistoryAPIDataEndpoint}/{WeatherHistoryAPIDataEndpointVersion}/{WeatherHistoryAPIHistoryEndpoint}/";
     }
 }
