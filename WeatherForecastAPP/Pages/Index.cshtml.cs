@@ -16,6 +16,7 @@ namespace WeatherForecastAPP.Pages
 		private readonly IWeatherIconsService _weatherIconsService;
 		private readonly IHourlyWeatherForecastService _hourlyForecastService;
 		private readonly IDailyWeatherForecastService _dailyWeatherForecastService;
+		private readonly IHistoryWeatherService _historyWeatherService;
 
 		public IndexModel(
 			ILogger<IndexModel> logger, 
@@ -24,7 +25,8 @@ namespace WeatherForecastAPP.Pages
 			ICurrentWeatherService currentWeatherService,
 			IWeatherIconsService weatherIconsService,
 			IHourlyWeatherForecastService hourlyWeatherForecastService,
-			IDailyWeatherForecastService dailyWeatherForecastService)
+			IDailyWeatherForecastService dailyWeatherForecastService,
+			IHistoryWeatherService historyWeatherService)
 		{
 			_logger = logger;
 			_cityService = cityService;
@@ -33,6 +35,7 @@ namespace WeatherForecastAPP.Pages
 			_weatherIconsService = weatherIconsService;
 			_hourlyForecastService = hourlyWeatherForecastService;
 			_dailyWeatherForecastService = dailyWeatherForecastService;
+			_historyWeatherService = historyWeatherService;
 		}
 
 
@@ -40,15 +43,18 @@ namespace WeatherForecastAPP.Pages
 		public City CurrentCity { get; private set; }
 		public List<City> Cities { get; private set; }
 		public CurrentWeather CurrentWeather {  get; private set; }
-
         public WeatherForecast WeatherForecastHourly { get; private set; }
 		public DailyWeatherForecast WeatherForecastDaily { get; private set; }
+		public WeatherHistory HistoricalData {  get; private set; }
+		public bool IsAuthenticated { get; set; } = false;
 
         public async Task OnGetAsync()
 		{
 			try
 			{
-				var cities = await _cityService.GetAsync("»·slav", null, null);
+                IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated") == "true";
+
+                var cities = await _cityService.GetAsync("»·slav", null, null);
 				CurrentCity = cities[0];
 				await SetData();
             } 
@@ -61,7 +67,8 @@ namespace WeatherForecastAPP.Pages
 
 		public async Task<IActionResult> OnPostNewCity(string city)
 		{
-			try
+            IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated") == "true";
+            try
 			{
 				var cities = await _cityService.GetAsync(city, null, null);
 				if (cities.Count == 1)
@@ -87,7 +94,8 @@ namespace WeatherForecastAPP.Pages
 
 		public async Task<IActionResult> OnPostFromCities()
 		{
-			try
+            IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated") == "true";
+            try
 			{
 				var selectedCity = await _cityService.GetByIdAsync(SelectedCityId);
 				if (selectedCity != null)
@@ -118,6 +126,10 @@ namespace WeatherForecastAPP.Pages
             CurrentWeather = await _currentWeatherService.GetCurrentWeatherAsync(CurrentCity);
             WeatherForecastHourly = await _hourlyForecastService.GetHourlyWeatherForecastAsync(CurrentCity);
             WeatherForecastDaily = await _dailyWeatherForecastService.GetDailyWeatherForecastAsync(CurrentCity);
+			if (IsAuthenticated)
+			{
+				HistoricalData = await _historyWeatherService.GetHistoryWeatherAsync(CurrentCity);
+			}
 			if (CurrentWeather == null || WeatherForecastHourly == null || WeatherForecastDaily == null)
 			{
 				DataLoaded = false;
