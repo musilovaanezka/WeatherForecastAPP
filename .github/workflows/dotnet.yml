@@ -28,3 +28,8 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Test
       run: dotnet test WeatherForecastAPPTest --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        slug: musilovaanezka/WeatherForecastAPP
