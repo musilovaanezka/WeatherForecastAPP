@@ -6,10 +6,10 @@ namespace WeatherForecastAPP.Services
 {
 	public class CityService : ICityService
 	{
-		private readonly ApiClientService _apiClientService;
+		private readonly IApiClientService _apiClientService;
 		private const string Controller = "cities";
 
-		public CityService(ApiClientService apiClientService)
+		public CityService(IApiClientService apiClientService)
 		{
 			_apiClientService = apiClientService;
 		}

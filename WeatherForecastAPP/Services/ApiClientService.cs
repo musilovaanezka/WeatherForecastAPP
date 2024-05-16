@@ -4,18 +4,27 @@ using WeatherForecastAPP.Interfaces;
 
 namespace WeatherForecastAPP.Services
 {
-	public class ApiClientService : BaseApiClientService
+    public interface IApiClientService
+    {
+        Task<T> PostAsync<T>(string endpoint, object data);
+        Task<T> GetAsync<T>(string endpoint, Dictionary<string, string>? parameters = null);
+    }
+    public class ApiClientService : BaseApiClientService, IApiClientService
 	{
-		//private readonly HttpClient _client;
-
 		public ApiClientService(HttpClient client) : base(client, Constants.APIRestUrl) { }
 
 		public async Task<T> PostAsync<T>(string endpoint, object data)
 		{
-			var json = JsonSerializer.Serialize(data);
-			var content = new StringContent(json, Encoding.UTF8, "application/json");
-			var response = await _client.PostAsync(endpoint, content);
-			return await HandleResponse<T>(response);
+			try
+			{
+				var json = JsonSerializer.Serialize(data);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				var response = await _client.PostAsync(endpoint, content);
+				return await HandleResponse<T>(response);
+			} catch (Exception e)
+			{
+                throw new Exception("Error in ApiClientService.PostAsync", e);
+            }
 		}
 	}
 }

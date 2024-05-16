@@ -8,18 +8,18 @@ namespace WeatherForecastAPP.Services
 		{
 			return services
 				.AddSingleton<IBaseApiClientService, BaseApiClientService>()
-				.AddSingleton<ApiClientService>()
+				.AddSingleton<IApiClientService, ApiClientService>()
 				.AddSingleton<ICityService, CityService>()
 				.AddSingleton<IUserService, UserService>()
 				.AddSingleton<ICurrentWeatherService, CurrentWeatherService>()
-				.AddSingleton<CurrentWeatherApiClientService>()
+				.AddSingleton<ICurrentWeatherApiClientService, CurrentWeatherApiClientService>()
 				.AddSingleton<IWeatherIconsService, WeatherIconsService>()
 				.AddSingleton<IHourlyWeatherForecastService, HourlyWeatherForecastService>()
-				.AddSingleton<HourlyWeatherForecastApiClientService>()
+				.AddSingleton<IHourlyWeatherForecastApiClientService, HourlyWeatherForecastApiClientService>()
 				.AddSingleton<IDailyWeatherForecastService, DailyWeatherForecastService>()
-				.AddSingleton<DailyWeatherForecastApiClientService>()
+				.AddSingleton<IDailyWeatherForecastApiClientService, DailyWeatherForecastApiClientService>()
 				.AddSingleton<IHistoryWeatherService, HistoryWeatherService>()
-				.AddSingleton<HistoryWeatherApiClientService>();
+				.AddSingleton<IHistoryWeatherApiClientService, HistoryWeatherApiClientService>();
 		}
 	}
 }

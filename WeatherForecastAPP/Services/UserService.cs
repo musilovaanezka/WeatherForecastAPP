@@ -6,9 +6,9 @@ namespace WeatherForecastAPP.Services
 {
 	public class UserService : IUserService
 	{
-		private readonly ApiClientService _apiClientService;
+		private readonly IApiClientService _apiClientService;
 		private const string Controller = "users";
-		public UserService(ApiClientService apiClientService)
+		public UserService(IApiClientService apiClientService)
 		{
 			_apiClientService = apiClientService;
 		}

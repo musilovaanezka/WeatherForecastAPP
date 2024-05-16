@@ -6,9 +6,9 @@ namespace WeatherForecastAPP.Services
 {
     public class HistoryWeatherService : IHistoryWeatherService
     {
-        private readonly HistoryWeatherApiClientService _apiClientService;
+        private readonly IHistoryWeatherApiClientService _apiClientService;
 
-        public HistoryWeatherService(HistoryWeatherApiClientService apiClientService)
+        public HistoryWeatherService(IHistoryWeatherApiClientService apiClientService)
         {
             _apiClientService = apiClientService;
         }
@@ -34,8 +34,12 @@ namespace WeatherForecastAPP.Services
         }
     }
 
-    public class HistoryWeatherApiClientService : BaseApiClientService
+    public class HistoryWeatherApiClientService :  BaseApiClientService, IHistoryWeatherApiClientService
     {
         public HistoryWeatherApiClientService(HttpClient client) : base(client, Constants.BaseWeatherAPIHistoryUrl) { }
+    }
+
+    public interface IHistoryWeatherApiClientService : IBaseApiClientService
+    {
     }
 }

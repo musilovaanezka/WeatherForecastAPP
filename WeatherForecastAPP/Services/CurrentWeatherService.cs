@@ -6,9 +6,9 @@ namespace WeatherForecastAPP.Services
 {
     public class CurrentWeatherService : ICurrentWeatherService
     {
-        private readonly CurrentWeatherApiClientService _apiClientService;
+        private readonly ICurrentWeatherApiClientService _apiClientService;
 
-        public CurrentWeatherService(CurrentWeatherApiClientService apiClientService)
+        public CurrentWeatherService(ICurrentWeatherApiClientService apiClientService)
         {
             _apiClientService = apiClientService;
         }
@@ -34,7 +34,7 @@ namespace WeatherForecastAPP.Services
         }
     }
 
-    public class CurrentWeatherApiClientService : BaseApiClientService
+    public class CurrentWeatherApiClientService : BaseApiClientService, ICurrentWeatherApiClientService
     {
         public CurrentWeatherApiClientService(HttpClient client) : base(client, Constants.BaseCurrentWeatherAPIUrl) { }
     }
