@@ -6,9 +6,9 @@ namespace WeatherForecastAPP.Services
 {
     public class HourlyWeatherForecastService : IHourlyWeatherForecastService
     {
-        private readonly HourlyWeatherForecastApiClientService _apiClientService;
+        private readonly IHourlyWeatherForecastApiClientService _apiClientService;
 
-        public HourlyWeatherForecastService(HourlyWeatherForecastApiClientService apiClientService)
+        public HourlyWeatherForecastService(IHourlyWeatherForecastApiClientService apiClientService)
         {
             _apiClientService = apiClientService;
         }
@@ -35,8 +35,12 @@ namespace WeatherForecastAPP.Services
         }
     }
 
-    public class HourlyWeatherForecastApiClientService : BaseApiClientService
+    public class HourlyWeatherForecastApiClientService : BaseApiClientService, IHourlyWeatherForecastApiClientService
     {
         public HourlyWeatherForecastApiClientService(HttpClient client) : base(client, Constants.BaseHourlyForecastWeatherAPIUrl) { }
+    }
+
+    public interface IHourlyWeatherForecastApiClientService : IBaseApiClientService
+    {
     }
 }
