@@ -8,9 +8,11 @@ namespace WeatherForecastAPP
 		public static string APIPort = "7193";
 		public static string APIProtocol = "https";
 
-		public static string APIRestUrl = $"{APIProtocol}://{APIUrl}:{APIPort}/api/";
+        //public static string APIRestUrl = $"{APIProtocol}://{APIUrl}:{APIPort}/api/";
+        public static string APIRestUrl = "https://amusil-weather-forecast-440f27844575.herokuapp.com/api";
 
-		public static string WeatherAPIKey = "27f5e232e3b11725bc87ed47808bead0";
+
+        public static string WeatherAPIKey = "27f5e232e3b11725bc87ed47808bead0";
 		public static string WeatherAPIBaseUrl = "https://api.openweathermap.org";
         public static string WeatherAPIProBaseUrl = "https://pro.openweathermap.org";
         public static string WeatherAPPBaseUrl = "https://openweathermap.org";
