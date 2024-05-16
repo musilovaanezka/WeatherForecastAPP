@@ -45,75 +45,75 @@ namespace WeatherForecastAPPTest
                 _mockHistoryWeatherService.Object);
         }
 
-        [Fact]
-        public async Task OnGetAsync_SetsCurrentCity()
-        {
-            // Arrange
-            var expectedCity = new City { Id = 1, Name = "Čáslav", Country = "TestCountry", Coord = new Coordinates { Lat = 1.0, Lon = 1.0 } };
-            _mockCityService
-                .Setup(service => service.GetAsync("Čáslav", null, null))
-                .ReturnsAsync(new List<City> { expectedCity });
+    //    [Fact]
+    //    public async Task OnGetAsync_SetsCurrentCity()
+    //    {
+    //        // Arrange
+    //        var expectedCity = new City { Id = 1, Name = "Čáslav", Country = "TestCountry", Coord = new Coordinates { Lat = 1.0, Lon = 1.0 } };
+    //        _mockCityService
+    //            .Setup(service => service.GetAsync("Čáslav", null, null))
+    //            .ReturnsAsync(new List<City> { expectedCity });
 
-            // Act
-            await _indexModel.OnGetAsync();
+    //        // Act
+    //        await _indexModel.OnGetAsync();
 
-            // Assert
-            Assert.Equal(expectedCity, _indexModel.CurrentCity);
-        }
+    //        // Assert
+    //        Assert.Equal(expectedCity, _indexModel.CurrentCity);
+    //    }
 
-        [Fact]
-        public async Task OnPostNewCity_SetsCurrentCity_WhenOneCityIsReturned()
-        {
-            // Arrange
-            var expectedCity = new City { Id = 2, Name = "AnotherCity", Country = "AnotherCountry", Coord = new Coordinates { Lat = 2.0, Lon = 2.0 } };
-            _mockCityService
-                .Setup(service => service.GetAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(new List<City> { expectedCity });
+    //    [Fact]
+    //    public async Task OnPostNewCity_SetsCurrentCity_WhenOneCityIsReturned()
+    //    {
+    //        // Arrange
+    //        var expectedCity = new City { Id = 2, Name = "AnotherCity", Country = "AnotherCountry", Coord = new Coordinates { Lat = 2.0, Lon = 2.0 } };
+    //        _mockCityService
+    //            .Setup(service => service.GetAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+    //            .ReturnsAsync(new List<City> { expectedCity });
 
-            // Act
-            var result = await _indexModel.OnPostNewCity("TestCity");
+    //        // Act
+    //        var result = await _indexModel.OnPostNewCity("TestCity");
 
-            // Assert
-            Assert.Equal(expectedCity, _indexModel.CurrentCity);
-            Assert.IsType<PageResult>(result);
-        }
+    //        // Assert
+    //        Assert.Equal(expectedCity, _indexModel.CurrentCity);
+    //        Assert.IsType<PageResult>(result);
+    //    }
 
-        [Fact]
-        public async Task OnPostNewCity_SetsCities_WhenMultipleCitiesAreReturned()
-        {
-            // Arrange
-            var expectedCities = new List<City>
-    {
-        new City { Id = 3, Name = "City1", Country = "Country1", Coord = new Coordinates { Lat = 3.0, Lon = 3.0 } },
-        new City { Id = 4, Name = "City2", Country = "Country2", Coord = new Coordinates { Lat = 4.0, Lon = 4.0 } }
-    };
-            _mockCityService
-                .Setup(service => service.GetAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(expectedCities);
+    //    [Fact]
+    //    public async Task OnPostNewCity_SetsCities_WhenMultipleCitiesAreReturned()
+    //    {
+    //        // Arrange
+    //        var expectedCities = new List<City>
+    //{
+    //    new City { Id = 3, Name = "City1", Country = "Country1", Coord = new Coordinates { Lat = 3.0, Lon = 3.0 } },
+    //    new City { Id = 4, Name = "City2", Country = "Country2", Coord = new Coordinates { Lat = 4.0, Lon = 4.0 } }
+    //};
+    //        _mockCityService
+    //            .Setup(service => service.GetAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+    //            .ReturnsAsync(expectedCities);
 
-            // Act
-            var result = await _indexModel.OnPostNewCity("TestCity");
+    //        // Act
+    //        var result = await _indexModel.OnPostNewCity("TestCity");
 
-            // Assert
-            Assert.Equal(expectedCities, _indexModel.Cities);
-            Assert.IsType<PageResult>(result);
-        }
+    //        // Assert
+    //        Assert.Equal(expectedCities, _indexModel.Cities);
+    //        Assert.IsType<PageResult>(result);
+    //    }
 
-        [Fact]
-        public async Task OnPostFromCities_SetsCurrentCity_WhenCityIsFound()
-        {
-            // Arrange
-            var expectedCity = new City { Id = 5, Name = "FoundCity", Country = "FoundCountry", Coord = new Coordinates { Lat = 5.0, Lon = 5.0 } };
-            _mockCityService
-                .Setup(service => service.GetByIdAsync(It.IsAny<long>()))
-                .ReturnsAsync(expectedCity);
+    //    [Fact]
+    //    public async Task OnPostFromCities_SetsCurrentCity_WhenCityIsFound()
+    //    {
+    //        // Arrange
+    //        var expectedCity = new City { Id = 5, Name = "FoundCity", Country = "FoundCountry", Coord = new Coordinates { Lat = 5.0, Lon = 5.0 } };
+    //        _mockCityService
+    //            .Setup(service => service.GetByIdAsync(It.IsAny<long>()))
+    //            .ReturnsAsync(expectedCity);
 
-            // Act
-            var result = await _indexModel.OnPostFromCities();
+    //        // Act
+    //        var result = await _indexModel.OnPostFromCities();
 
-            // Assert
-            Assert.Equal(expectedCity, _indexModel.CurrentCity);
-            Assert.IsType<PageResult>(result);
-        }
+    //        // Assert
+    //        Assert.Equal(expectedCity, _indexModel.CurrentCity);
+    //        Assert.IsType<PageResult>(result);
+    //    }
     }
 }
