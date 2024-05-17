@@ -151,7 +151,7 @@
 
     <h4>Daily Weather Forecast</h4>
     <div class="col-12 mb-4 bg-light">
-        @if (Model.WeatherForecastDaily.List == null || !Model.WeatherForecastDaily.List.Any())
+        @if (Model.WeatherForecastDaily == null || !Model.WeatherForecastDaily.List.Any())
         {
             <h4>No data available</h4>
         } else

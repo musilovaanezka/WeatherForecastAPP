@@ -126,16 +126,26 @@ namespace WeatherForecastAPP.Pages
             CurrentWeather = await _currentWeatherService.GetCurrentWeatherAsync(CurrentCity);
             WeatherForecastHourly = await _hourlyForecastService.GetHourlyWeatherForecastAsync(CurrentCity);
             WeatherForecastDaily = await _dailyWeatherForecastService.GetDailyWeatherForecastAsync(CurrentCity);
-			if (IsAuthenticated)
+
+            _logger.LogInformation($"CurrentWeather: {CurrentWeather}");
+            _logger.LogInformation($"WeatherForecastHourly: {WeatherForecastHourly}");
+            _logger.LogInformation($"WeatherForecastDaily: {WeatherForecastDaily}");
+
+
+            if (IsAuthenticated)
 			{
 				HistoricalData = await _historyWeatherService.GetHistoryWeatherAsync(CurrentCity);
-			}
+                _logger.LogInformation($"HistoricalData: {HistoricalData}");
+            }
 			if (CurrentWeather == null || WeatherForecastHourly == null || WeatherForecastDaily == null)
 			{
 				DataLoaded = false;
 				return;
 			}
 
+            _logger.LogInformation($"WeatherForecastDaily.List: {WeatherForecastDaily.List}");
         }
+
+    }
     }
 }
