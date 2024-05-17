@@ -13,10 +13,10 @@ namespace WeatherForecastAPP
 
 
         public static string WeatherAPIKey = "27f5e232e3b11725bc87ed47808bead0";
-		public static string WeatherAPIBaseUrl = "https://api.openweathermap.org";
-        public static string WeatherAPIProBaseUrl = "https://pro.openweathermap.org";
-        public static string WeatherAPPBaseUrl = "https://openweathermap.org";
-        public static string WeatherHistoryAPIBaseUrl = "https://history.openweathermap.org";
+		public static string WeatherAPIBaseUrl = "http://api.openweathermap.org";
+        public static string WeatherAPIProBaseUrl = "http://pro.openweathermap.org";
+        public static string WeatherAPPBaseUrl = "http://openweathermap.org";
+        public static string WeatherHistoryAPIBaseUrl = "http://history.openweathermap.org";
 
 
         public static string WeatherAPIDataEndpoint = "data";
