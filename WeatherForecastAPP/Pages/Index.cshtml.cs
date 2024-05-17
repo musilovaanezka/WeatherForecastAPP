@@ -143,9 +143,8 @@ namespace WeatherForecastAPP.Pages
 				return;
 			}
 
-            _logger.LogInformation($"WeatherForecastDaily.List: {WeatherForecastDaily.List}");
-        }
+			_logger.LogInformation($"WeatherForecastDaily.List: {WeatherForecastDaily.List}");
 
-    }
+        }
     }
 }
