@@ -151,21 +151,27 @@
 
     <h4>Daily Weather Forecast</h4>
     <div class="col-12 mb-4 bg-light">
-        @foreach (var dayForecast in Model.WeatherForecastDaily.List)
+        @if (Model.WeatherForecastDaily.List == null || !Model.WeatherForecastDaily.List.Any())
         {
-            <div class="card mb-3">
-                <div class="card-header p-2 bg-white" id="@("heading" + dayForecast.Dt)">
-                    <table class="table table-borderless m-0">
-                        <tr class="align-middle">
-                            <td width="25%">@DateTimeOffset.FromUnixTimeSeconds(dayForecast.Dt).DateTime.ToString("dddd, d. MMMM")</td>
-                            <td width="20%">@Convert.ToInt32(dayForecast.Temp.Day) °C</td>
-                            <td width="20%">@dayForecast.Weather[0].Description</td>
-                            <td width="20%">@(dayForecast.Rain != null ? dayForecast.Rain + " mm" : "No Rain")</td>
-                            <td width="15%"><img src="@Model.GetIcon(@dayForecast.Weather[0].Icon)" alt="Weather Icon" /></td>
-                        </tr>
-                    </table>
+            <h4>No data available</h4>
+        } else
+        {
+            @foreach (var dayForecast in Model.WeatherForecastDaily.List)
+            {
+                <div class="card mb-3">
+                    <div class="card-header p-2 bg-white" id="@("heading" + dayForecast.Dt)">
+                        <table class="table table-borderless m-0">
+                            <tr class="align-middle">
+                                <td width="25%">@DateTimeOffset.FromUnixTimeSeconds(dayForecast.Dt).DateTime.ToString("dddd, d. MMMM")</td>
+                                <td width="20%">@Convert.ToInt32(dayForecast.Temp.Day) °C</td>
+                                <td width="20%">@dayForecast.Weather[0].Description</td>
+                                <td width="20%">@(dayForecast.Rain != null ? dayForecast.Rain + " mm" : "No Rain")</td>
+                                <td width="15%"><img src="@Model.GetIcon(@dayForecast.Weather[0].Icon)" alt="Weather Icon" /></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            }
         }
     </div>
 
