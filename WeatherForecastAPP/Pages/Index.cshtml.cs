@@ -54,8 +54,8 @@ namespace WeatherForecastAPP.Pages
 			{
                 IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated") == "true";
 
-                var cities = await _cityService.GetAsync("»·slav", null, null);
-				CurrentCity = cities.FirstOrDefault();
+                var cities = await _cityService.GetAsync("Prague", null, null);
+				CurrentCity = cities[0];
 				await SetData();
             } 
 			catch (Exception ex)
@@ -133,7 +133,8 @@ namespace WeatherForecastAPP.Pages
             }
 			if (CurrentWeather == null || WeatherForecastHourly == null || WeatherForecastDaily == null)
 			{
-				DataLoaded = false;
+                _logger.LogError("Error occurred while fetching cities");
+                DataLoaded = false;
 				return;
 			}
         }
