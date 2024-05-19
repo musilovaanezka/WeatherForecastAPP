@@ -33,6 +33,5 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         slug: musilovaanezka/WeatherForecastAPP
-    - name: add environment 
-      env:
-        apikey: ${{ secrets.WEATHER_FORECAST_API_KEY }}
+    env:
+      apikey: ${{ secrets.WEATHER_FORECAST_API_KEY }}
