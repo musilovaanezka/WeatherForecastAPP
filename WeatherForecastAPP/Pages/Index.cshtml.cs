@@ -55,7 +55,7 @@ namespace WeatherForecastAPP.Pages
                 IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated") == "true";
 
                 var cities = await _cityService.GetAsync("»·slav", null, null);
-				CurrentCity = cities.[0];
+				CurrentCity = cities[0];
 				await SetData();
             } 
 			catch (Exception ex)
