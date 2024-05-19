@@ -55,7 +55,7 @@ namespace WeatherForecastAPP.Pages
                 IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated") == "true";
 
                 var cities = await _cityService.GetAsync("»·slav", null, null);
-				CurrentCity = cities.FirstOrDefault();
+				CurrentCity = cities.[0];
 				await SetData();
             } 
 			catch (Exception ex)
@@ -127,24 +127,15 @@ namespace WeatherForecastAPP.Pages
             WeatherForecastHourly = await _hourlyForecastService.GetHourlyWeatherForecastAsync(CurrentCity);
             WeatherForecastDaily = await _dailyWeatherForecastService.GetDailyWeatherForecastAsync(CurrentCity);
 
-            _logger.LogInformation($"CurrentWeather: {CurrentWeather}");
-            _logger.LogInformation($"WeatherForecastHourly: {WeatherForecastHourly}");
-            _logger.LogInformation($"WeatherForecastDaily: {WeatherForecastDaily}");
-
-
             if (IsAuthenticated)
 			{
 				HistoricalData = await _historyWeatherService.GetHistoryWeatherAsync(CurrentCity);
-                _logger.LogInformation($"HistoricalData: {HistoricalData}");
             }
 			if (CurrentWeather == null || WeatherForecastHourly == null || WeatherForecastDaily == null)
 			{
 				DataLoaded = false;
 				return;
 			}
-
-			_logger.LogInformation($"WeatherForecastDaily.List: {WeatherForecastDaily.List}");
-
         }
     }
 }
