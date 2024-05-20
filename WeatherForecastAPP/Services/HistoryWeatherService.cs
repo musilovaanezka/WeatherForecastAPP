@@ -40,7 +40,7 @@ namespace WeatherForecastAPP.Services
             $"{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_BASE_URL")}" +
             $"/{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT")}" +
             $"/{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT_VERSION")}" +
-            $"/{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_CITY_ENDPOINT")}/") { }
+            $"/{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_DATA_HISTORY_ENDPOINT")}/") { }
     }
 
     public interface IHistoryWeatherApiClientService : IBaseApiClientService
