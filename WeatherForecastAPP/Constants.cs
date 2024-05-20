@@ -48,7 +48,11 @@ namespace WeatherForecastAPP
 		//public static string WeatherAPIForecastHourlyEndpoint = "hourly";
 		public static string WeatherAPIForecastHourlyEndpoint = Environment.GetEnvironmentVariable("WEATHER_API_FORECAST_HOURLY_ENDPOINT");
 
-        public static string BaseHourlyForecastWeatherAPIUrl = $"{WeatherAPIProBaseUrl}/{WeatherAPIDataEndpoint}/{WeatherAPIDataEndpointVersion}/{WeatherAPIForecastEndpoint}/";
+        public static string BaseHourlyForecastWeatherAPIUrl = 
+			$"{Environment.GetEnvironmentVariable("WEATHER_API_PRO_BASE_URL")}" +
+			$"/{Environment.GetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT")}" +
+			$"/{Environment.GetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT_VERSION")}" +
+			$"/{Environment.GetEnvironmentVariable("WEATHER_API_FORECAST_ENDPOINT")}/";
 
         //public static string WeatherAPIForecastDailyEndpoint = "daily";
 		public static string WeatherAPIForecastDailyEndpoint = Environment.GetEnvironmentVariable("WEATHER_API_FORECAST_DAILY_ENDPOINT");

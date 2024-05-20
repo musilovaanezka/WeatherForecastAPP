@@ -36,6 +36,8 @@ namespace WeatherForecastAPP.Services
 
     public class CurrentWeatherApiClientService : BaseApiClientService, ICurrentWeatherApiClientService
     {
-        public CurrentWeatherApiClientService(HttpClient client) : base(client, Constants.BaseCurrentWeatherAPIUrl) { }
+        public CurrentWeatherApiClientService(HttpClient client) : base(client, $"{Environment.GetEnvironmentVariable("WEATHER_API_BASE_URL")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT_VERSION")}/") { }
     }
 }

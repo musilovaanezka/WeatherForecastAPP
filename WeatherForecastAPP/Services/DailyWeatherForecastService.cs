@@ -38,7 +38,10 @@ namespace WeatherForecastAPP.Services
 
     public class DailyWeatherForecastApiClientService : BaseApiClientService, IDailyWeatherForecastApiClientService
     {
-        public DailyWeatherForecastApiClientService(HttpClient client) : base(client, Constants.BaseDailyForecastWeatherAPIUrl) { }
+        public DailyWeatherForecastApiClientService(HttpClient client) : base(client, ($"{Environment.GetEnvironmentVariable("WEATHER_API_PRO_BASE_URL")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT_VERSION")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_API_FORECAST_ENDPOINT")}/")) { }
     }
 
     public interface IDailyWeatherForecastApiClientService : IBaseApiClientService
