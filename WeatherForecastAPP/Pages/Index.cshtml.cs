@@ -54,7 +54,7 @@ namespace WeatherForecastAPP.Pages
 			{
                 IsAuthenticated = HttpContext.Session.GetString("IsAuthenticated") == "true";
 
-                var cities = await _cityService.GetAsync("Prague", null, null);
+                var cities = await _cityService.GetAsync(Environment.GetEnvironmentVariable("DEFAULT_CITY"), null, null);
 				CurrentCity = cities[0];
 				await SetData();
             } 
