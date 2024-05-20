@@ -7,7 +7,7 @@ namespace WeatherForecastAPP.Services
     {
         protected readonly HttpClient _client;
 
-        public BaseApiClientService(HttpClient client, string baseAddress = "https://api.openweathermap.org/data/2.5/")
+        public BaseApiClientService(HttpClient client, string baseAddress = "http://api.openweathermap.org/data/2.5/")
         {
             _client = client;
             _client.BaseAddress = new Uri(baseAddress);

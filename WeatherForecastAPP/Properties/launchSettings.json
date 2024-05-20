@@ -24,7 +24,25 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7134;http://localhost:5084",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AMUSIL_API": "http://amusil-weather-forecast-440f27844575.herokuapp.com/api/",
+        "WEATHER_API_BASE_URL": "http://api.openweathermap.org",
+        "WEATHER_API_PRO_BASE_URL": "http://pro.openweathermap.org",
+        "WEATHER_MAP_BASE_URL": "http://openweathermap.org",
+        "WEATHER_HISTORY_API_BASE_URL": "http://history.openweathermap.org",
+        "WEATHER_API_DATA_ENDPOINT": "data",
+        "WEATHER_API_DATA_ENDPOINT_VERSION": "2.5",
+        "WEATHER_API_DATA_CURRENT_WEATHER_ENDPOINT": "weather",
+        "WEATHER_API_IMG_ENDPOINT": "img/wn",
+        "WEATHER_API_FORECAST_ENDPOINT": "forecast",
+        "WEATHER_API_FORECAST_HOURLY_ENDPOINT": "hourly",
+        "WEATHER_API_FORECAST_DAILY_ENDPOINT": "daily",
+        "WEATHER_HISTORY_API_DATA_ENDPOINT": "data",
+        "WEATHER_HISTORY_API_DATA_ENDPOINT_VERSION": "2.5",
+        "WEATHER_HISTORY_API_DATA_HISTORY_ENDPOINT": "history",
+        "WEATHER_HISTORY_API_CITY_ENDPOINT": "city",
+        "API_KEY": "27f5e232e3b11725bc87ed47808bead0",
+        "DEFAULT_CITY": "Prague"
       }
     },
     "IIS Express": {
