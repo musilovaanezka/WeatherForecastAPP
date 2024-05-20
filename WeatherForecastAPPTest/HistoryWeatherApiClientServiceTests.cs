@@ -12,6 +12,11 @@ namespace WeatherForecastAPPTest
         [Fact]
         public void Constructor_CreatesInstance()
         {
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_BASE_URL", "http://history.openweathermap.org");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT_VERSION", "2.5");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_CITY_ENDPOINT", "city");
+
             // Arrange
             var client = new HttpClient();
 

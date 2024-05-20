@@ -14,6 +14,22 @@ namespace WeatherForecastAPPTest
         [Fact]
         public void AddServices_RegistersServices()
         {
+            Environment.SetEnvironmentVariable("AMUSIL_API", "http://pro.openweathermap.org");
+            Environment.SetEnvironmentVariable("WEATHER_API_BASE_URL", "http://pro.openweathermap.org");
+            Environment.SetEnvironmentVariable("WEATHER_API_PRO_BASE_URL", "http://pro.openweathermap.org");
+            Environment.SetEnvironmentVariable("WEATHER_MAP_BASE_URL", "http://pro.openweathermap.org");
+            Environment.SetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT_VERSION", "data");
+            Environment.SetEnvironmentVariable("WEATHER_API_DATA_CURRENT_WEATHER_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_API_IMG_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_API_FORECAST_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_API_FORECAST_HOURLY_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_API_FORECAST_DAILY_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT_VERSION", "data");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_DATA_HISTORY_ENDPOINT", "data");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_CITY_ENDPOINT", "data");
+
             // Arrange
             var services = new ServiceCollection();
             services.AddSingleton(new HttpClient());

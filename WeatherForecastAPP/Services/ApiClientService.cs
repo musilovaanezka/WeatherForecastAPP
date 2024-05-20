@@ -11,7 +11,7 @@ namespace WeatherForecastAPP.Services
     }
     public class ApiClientService : BaseApiClientService, IApiClientService
 	{
-		public ApiClientService(HttpClient client) : base(client, Constants.APIRestUrl) { }
+		public ApiClientService(HttpClient client) : base(client, Environment.GetEnvironmentVariable("AMUSIL_API")) { }
 
 		public async Task<T> PostAsync<T>(string endpoint, object data)
 		{

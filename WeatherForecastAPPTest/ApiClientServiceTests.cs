@@ -19,6 +19,7 @@ namespace WeatherForecastAPPTest
 
         public ApiClientServiceTests()
         {
+            Environment.SetEnvironmentVariable("AMUSIL_API", "http://pro.openweathermap.org");
             var handler = new TestHttpMessageHandler(new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.OK,

@@ -36,7 +36,11 @@ namespace WeatherForecastAPP.Services
 
     public class HistoryWeatherApiClientService :  BaseApiClientService, IHistoryWeatherApiClientService
     {
-        public HistoryWeatherApiClientService(HttpClient client) : base(client, Constants.BaseWeatherAPIHistoryUrl) { }
+        public HistoryWeatherApiClientService(HttpClient client) : base(client, 
+            $"{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_BASE_URL")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_DATA_ENDPOINT_VERSION")}" +
+            $"/{Environment.GetEnvironmentVariable("WEATHER_HISTORY_API_CITY_ENDPOINT")}/") { }
     }
 
     public interface IHistoryWeatherApiClientService : IBaseApiClientService
