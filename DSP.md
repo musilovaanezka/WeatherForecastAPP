@@ -102,7 +102,7 @@ Systém nabízí aplikaci pro předpověď počasí v daném městě skrze webov
 - Frontendová aplikace komunikuje s několika různými API
 - Aplikace získává čerstvá data z api po každém načtení hlavní stránky nebo odeslání formuláře
 - databáze měst obsahuje zhruba 20 tisíc položek z celého světa - rozlišení měst
-- informace o očekávaném formátu dat poskytovaných od OpenWeather jsou k nalezení v dokumentaci této služby
+- informace o očekávaném formátu dat poskytovaných od OpenWeather jsou k nalezení v dokumentaci této služby pro verzi 2.5
 - aplikace je umístěna na [Heroku](https://heroku.com/)
 
 ## Časové rozvržení
