@@ -21,6 +21,8 @@ namespace WeatherForecastAPP.Services
                     { "appid", Constants.WeatherAPIKey },
                     { "lat", city.Coord.Lat.ToString("0.00000000", CultureInfo.InvariantCulture) },
                     { "lon", city.Coord.Lon.ToString("0.00000000", CultureInfo.InvariantCulture) },
+                    { "start", DateTimeOffset.UtcNow.AddDays(-21).ToUnixTimeSeconds().ToString() },
+                    { "end", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() },
                     { "units", "metric" }
                 };
 
