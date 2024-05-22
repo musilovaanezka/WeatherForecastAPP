@@ -91,6 +91,11 @@ Systém nabízí aplikaci pro předpověď počasí v daném městě skrze webov
 
 - Když nebude API na OpenWeather z jakéhokoli důvodu dostupné, aplikace nebude fungovat
 - Když jakkoli změní endpointy OpenWeather, aplikace bude vyžadovat úpravu
+  - https://api.openweathermap.org/data/2.5/weather
+  - https://api.openweathermap.org/data/2.5/forecast/hourly
+  - https://api.openweathermap.org/data/2.5/forecast/daily
+  - https://history.openweathermap.org/data/2.5/history/city
+  - https://openweathermap.org/img/wn
 
 ## Další poznámky
 
