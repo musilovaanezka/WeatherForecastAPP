@@ -67,7 +67,7 @@ Systém nabízí aplikaci pro předpověď počasí v daném městě skrze webov
 
 - ASP .NET 7.0 s Razor Pages
 - Apache server
-- OpenWeather - [https://openweathermap.org/](https://openweathermap.org/)
+- [OpenWeather](https://openweathermap.org/)
 
 ## Popis databáze
 
@@ -95,6 +95,10 @@ Systém nabízí aplikaci pro předpověď počasí v daném městě skrze webov
 ## Další poznámky
 
 - Frontendová aplikace komunikuje s několika různými API
+- Aplikace získává čerstvá data z api po každém načtení hlavní stránky nebo odeslání formuláře
+- databáze měst obsahuje zhruba 20 tisíc položek z celého světa - rozlišení měst
+- informace o očekávaném formátu dat poskytovaných od OpenWeather jsou k nalezení v dokumentaci této služby
+- aplikace je umístěna na [Heroku](https://heroku.com/)
 
 ## Časové rozvržení
 
