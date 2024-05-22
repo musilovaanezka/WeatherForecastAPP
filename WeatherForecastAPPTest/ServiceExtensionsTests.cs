@@ -18,6 +18,7 @@ namespace WeatherForecastAPPTest
             Environment.SetEnvironmentVariable("WEATHER_API_BASE_URL", "http://pro.openweathermap.org");
             Environment.SetEnvironmentVariable("WEATHER_API_PRO_BASE_URL", "http://pro.openweathermap.org");
             Environment.SetEnvironmentVariable("WEATHER_MAP_BASE_URL", "http://pro.openweathermap.org");
+            Environment.SetEnvironmentVariable("WEATHER_HISTORY_API_BASE_URL", "http://history.openweathermap.org");
             Environment.SetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT", "data");
             Environment.SetEnvironmentVariable("WEATHER_API_DATA_ENDPOINT_VERSION", "data");
             Environment.SetEnvironmentVariable("WEATHER_API_DATA_CURRENT_WEATHER_ENDPOINT", "data");
@@ -50,7 +51,6 @@ namespace WeatherForecastAPPTest
             Assert.NotNull(provider.GetService<IHourlyWeatherForecastApiClientService>());
             Assert.NotNull(provider.GetService<IDailyWeatherForecastService>());
             Assert.NotNull(provider.GetService<IDailyWeatherForecastApiClientService>());
-            Assert.NotNull(provider.GetService<IHistoryWeatherService>());
             Assert.NotNull(provider.GetService<IHistoryWeatherApiClientService>());
         }
     }

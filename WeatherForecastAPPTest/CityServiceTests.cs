@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WeatherForecastAPP.Interfaces;
 using WeatherForecastAPP.Model;
 using WeatherForecastAPP.Services;
+using WeatherForecastAPP.Pages;
 
 namespace WeatherForecastAPPTest
 {

@@ -39,13 +39,13 @@ namespace WeatherForecastAPP.Pages
 		}
 
 
-		public bool DataLoaded { get; private set; } = true;
-		public City CurrentCity { get; private set; }
-		public List<City> Cities { get; private set; }
-		public CurrentWeather CurrentWeather {  get; private set; }
-        public WeatherForecast WeatherForecastHourly { get; private set; }
-		public DailyWeatherForecast WeatherForecastDaily { get; private set; }
-		public WeatherHistory HistoricalData {  get; private set; }
+		public bool DataLoaded { get; set; } = true;
+		public City CurrentCity { get; set; }
+		public List<City> Cities { get; set; }
+		public CurrentWeather CurrentWeather {  get; set; }
+        public WeatherForecast WeatherForecastHourly { get; set; }
+		public DailyWeatherForecast WeatherForecastDaily { get; set; }
+		public WeatherHistory HistoricalData {  get; set; }
 		public bool IsAuthenticated { get; set; } = false;
 
         public async Task OnGetAsync()
@@ -116,7 +116,7 @@ namespace WeatherForecastAPP.Pages
 			return _weatherIconsService.GetIconUrlAsync(icon, zoom);
 		}
 
-		private async Task SetData()
+		public async Task SetData()
 		{
 			if (CurrentCity == null) 
 			{
